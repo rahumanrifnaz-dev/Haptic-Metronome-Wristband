@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Metronome Studio</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <div class="app-container">
+        
+        <header class="top-bar">
+            <div class="logo">🎵 Smart Metronome System</div>
+            <div class="status-indicator" id="status-indicator">
+                <div class="status-dot" id="status-dot"></div>
+                <span id="status-text">WAITING FOR HARDWARE...</span>
+            </div>
+        </header>
+
+        <main class="content-area">
+            
+            <div class="panel left-panel">
+                <div class="panel-title" style="margin-bottom: 10px;">Live Sensor Feed</div>
+                
+                <div class="sensor-toggle-container">
+                    <button id="btn-sound" class="sensor-toggle active">🎙️ Sound Feed</button>
+                    <button id="btn-force" class="sensor-toggle">🤌 Force Feed</button>
+                </div>
+
+                <div class="pulse-ring" id="pulse-ring">
+                    <div class="bpm-value" id="bpm-value">--</div>
+                    <div class="bpm-label" id="bpm-label">MIC BPM</div>
+                </div>
+                <div class="chart-wrapper" style="height: 180px; width: 100%; margin-top: 15px;">
+                    <canvas id="bpmChart"></canvas>
+                </div>
+            </div>
+
+            <div class="panel right-panel control-panel">
+                <div class="panel-title">Haptic Motor Control</div>
+                <p class="control-desc">Manually override the metronome tempo and transmit the target sequence to the ESP32 wristband.</p>
+                
+                <div class="input-group">
+                    <label for="motor-bpm-input">TARGET TEMPO (BPM)</label>
+                    <input type="number" id="motor-bpm-input" placeholder="e.g. 120" min="0" max="250">
+                </div>
+
+                <button id="transmit-btn" class="transmit-btn">
+                    <span class="btn-icon">📡</span> Transmit
+                </button>
+
+                <div class="transmission-status" id="tx-status">
+                    Currently Transmitting: <strong id="current-tx-bpm">None</strong>
+                </div>
+            </div>
+
+        </main>
+
+        <footer class="bottom-footer">
+            Creators: Pasan, Sudeeptha and Rifnaz
+        </footer>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

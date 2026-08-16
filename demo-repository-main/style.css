@@ -1,0 +1,56 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background-color: #0b0f19; color: #ffffff; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; height: 100vh; overflow: hidden; }
+.app-container { display: flex; flex-direction: column; height: 100%; padding: 20px; gap: 20px; }
+
+.top-bar { display: flex; justify-content: space-between; align-items: center; background: #161e2e; padding: 15px 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+.logo { font-size: 22px; font-weight: bold; color: #38bdf8; letter-spacing: 1px; }
+
+.status-indicator { display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 8px 20px; border-radius: 50px; font-weight: bold; font-size: 14px; color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); transition: all 0.3s; }
+.status-dot { width: 12px; height: 12px; border-radius: 50%; background-color: #ef4444; margin-right: 10px; box-shadow: 0 0 10px #ef4444; }
+.status-indicator.active { color: #10b981; border-color: rgba(16, 185, 129, 0.3); }
+.status-indicator.active .status-dot { background-color: #10b981; box-shadow: 0 0 15px #10b981; }
+
+.content-area { display: flex; gap: 20px; flex: 1; min-height: 0; }
+.panel { background: #161e2e; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); padding: 25px; }
+.panel-title { font-size: 18px; color: #94a3b8; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; text-align: center; width: 100%; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+
+/* Left Panel */
+.left-panel { flex: 0.5; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+.pulse-ring { width: 230px; height: 230px; border-radius: 50%; background: #1e293b; border: 5px solid #334155; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: transform 0.05s; margin-top: 10px;}
+.bpm-value { font-size: 90px; font-weight: 900; color: #38bdf8; line-height: 1; text-shadow: 0 0 30px rgba(56, 189, 248, 0.4); }
+.bpm-label { color: #94a3b8; font-size: 16px; letter-spacing: 3px; margin-top: 5px; }
+
+@keyframes beatPulse { 0% { transform: scale(1); border-color: #38bdf8; box-shadow: 0 0 50px rgba(56, 189, 248, 0.5); } 100% { transform: scale(1); } }
+.pulse-ring.beat { animation: beatPulse 0.15s ease-out; }
+
+/* Right Panel (Control Center) */
+.right-panel { flex: 0.5; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(145deg, #161e2e, #0f172a); }
+.control-desc { color: #94a3b8; text-align: center; margin-bottom: 30px; font-size: 15px; line-height: 1.5; padding: 0 20px; }
+
+.input-group { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; width: 100%; }
+.input-group label { color: #38bdf8; font-weight: bold; letter-spacing: 2px; margin-bottom: 10px; font-size: 14px; }
+.input-group input { width: 60%; background: #0b0f19; border: 2px solid #334155; color: #fff; font-size: 40px; text-align: center; padding: 15px; border-radius: 15px; font-weight: bold; outline: none; transition: border 0.3s; }
+.input-group input:focus { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); }
+.input-group input::-webkit-outer-spin-button, .input-group input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.transmit-btn { color: #000; border: none; padding: 18px 40px; font-size: 18px; font-weight: bold; border-radius: 50px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all 0.3s; text-transform: uppercase; letter-spacing: 1px; background: #10b981; box-shadow: 0 0 20px rgba(16, 185, 129, 0.4); margin-bottom: 10px; }
+.transmit-btn:hover { transform: translateY(-3px); box-shadow: 0 0 30px rgba(16, 185, 129, 0.6); background: #34d399; }
+.transmit-btn:active { transform: translateY(1px); }
+
+.transmission-status { margin-top: 30px; color: #64748b; font-size: 15px; background: rgba(0,0,0,0.3); padding: 10px 20px; border-radius: 8px; }
+#current-tx-bpm { color: #f59e0b; font-size: 18px; margin-left: 5px; }
+
+.bottom-footer { text-align: center; color: #475569; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 0; }
+
+/* --- NEW UI FOR SENSOR TOGGLE --- */
+.sensor-toggle-container { display: flex; background: #0f172a; border-radius: 10px; margin-bottom: 10px; padding: 5px; width: 80%; }
+.sensor-toggle { flex: 1; background: transparent; border: none; color: #94a3b8; padding: 10px; font-size: 14px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: all 0.3s; }
+.sensor-toggle:hover { color: #fff; }
+
+#btn-sound.active { background: #38bdf8; color: #0b0f19; box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+#btn-force.active { background: #f59e0b; color: #0b0f19; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+
+/* --- FORCE SENSOR AMBER THEME --- */
+.force-theme .bpm-value { color: #f59e0b !important; text-shadow: 0 0 30px rgba(245, 158, 11, 0.4) !important; }
+@keyframes beatPulseForce { 0% { transform: scale(1); border-color: #f59e0b; box-shadow: 0 0 50px rgba(245, 158, 11, 0.5); } 100% { transform: scale(1); } }
+.pulse-ring.force-theme.beat { animation: beatPulseForce 0.15s ease-out; }
